@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dalwadi Vyom - Portfolio</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(rgba(244, 247, 246, 0.8), rgba(244, 247, 246, 0.8)),
+                url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #2c3e50;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- Updated Premium Header Styles --- */
+        header {
+            background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 100%);
+            color: white;
+            padding: 60px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-left {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-right {
+            flex: 1.5;
+            padding-left: 30px;
+        }
+
+        .profile-img {
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            object-fit: cover;
+            width: 200px;
+            height: 200px;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.08);
+            border-color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            margin: 10px 0;
+            font-size: 1.3em;
+            font-weight: 300;
+            color: #ececec;
+        }
+
+        /* --- Updated Modern Navigation --- */
+        nav {
+            margin-top: 25px;
+        }
+
+        nav a {
+            color: #d1d1d1;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: 500;
+            font-size: 1.1em;
+            transition: 0.3s;
+            position: relative;
+            cursor: pointer;
+            padding-bottom: 5px;
+        }
+
+        /* Animated Underline Effect */
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active-link::after {
+            width: 100%;
+        }
+
+        nav a:hover,
+        nav a.active-link {
+            color: white;
+        }
+
+        /* --- Section & Container Logic --- */
+        section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            margin-bottom: 20px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        section.active {
+            display: block;
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            min-height: 400px;
+        }
+
+        section a[target="_blank"]:hover {
+            background-color: #3498db !important;
+            transform: scale(1.05);
+            transition: 0.3s;
+        }
+
+        h2 {
+            color: #1a2a6c;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        /* Tables & UI */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: #1a2a6c;
+        }
+
+        .highlight {
+            color: #e91e63;
+            font-weight: bold;
+        }
+
+        .submit-btn {
+            background-color: #1a2a6c;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #3498db;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-right {
+                padding-left: 0;
+                margin-top: 25px;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 5px 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-left">
+            <img src="Portfolios.jpeg" alt="Vyom Dalwadi" class="profile-img">
+        </div>
+
+        <div class="header-right">
+            <h1>Vyom Dalwadi</h1>
+            <p>MERN Stack Developer | MCA Graduate 2026</p>
+
+            <nav id="main-nav">
+                <a onclick="showSection('about')">About</a>
+                <a onclick="showSection('education')">Education</a>
+                <a onclick="showSection('projects')">Projects</a>
+                <a onclick="showSection('skills')">Skills</a>
+                <a onclick="showSection('experience')">Experience</a>
+                <a onclick="showSection('contact')">Hire Me</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="about" class="active">
+            <h2>About Me</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
+                <div style="flex: 1; min-width: 300px;">
+                    <p>
+                        Hi! I am <strong>Dalwadi Vyom</strong>, a passionate and detail-oriented <strong>Web
+                            Developer</strong> based in Viramgam.
+                        I am currently pursuing my <b>Master's in Computer Applications (MCA) at Silver Oak
+                            University</b>.
+                    </p>
+                    <p>
+                        I specialize in building dynamic, scalable, and responsive web applications using the <span
+                            class="highlight">MERN stack</span>.
+                        With a strong academic background, including a <b>7.25 CGPA in BCA</b> and a recent <b>8.44 CGPA
+                            in my 3rd semester of MCA</b>,
+                        I am dedicated to delivering high-quality coding solutions.
+                    </p>
+                    <p>
+                        <strong>What I'm focused on:</strong><br>
+                        🚀 Developing full-stack projects like my Invoice Generator.<br>
+                        💻 Refining my skills in <b>React.js, Node.js, and MongoDB</b> through hands-on practice. <br>
+                        💪 Staying disciplined by balancing my technical studies with a personal fitness routine.
+                    </p>
+
+                    <div style="margin-top: 20px;">
+                        <a href="https://drive.google.com/file/d/1I7JqNjlHKRP0KQVaWsGzVZn-ffJEpZby/view?usp=drivesdk"
+                            target="_blank"
+                            style="display: inline-flex; align-items: center; padding: 12px 24px; background-color: #1a2a6c; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; transition: 0.3s;">
+                            View My Resume (PDF) 📄
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Academic & Personal Projects</h2>
+
+            <div
+                style="background: #fff; border: 1px solid #e0e0e0; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                    <h3 style="margin: 0; color: #1a2a6c;">🚀 Invoice Generator (MERN Stack)</h3>
+                    <span class="highlight">In Progress (40%)</span>
+                </div>
+                <p style="margin-top: 10px; color: #555;">
+                    A full-stack web application designed for small businesses to create, manage, and download
+                    professional PDF invoices.
+                </p>
+                <ul style="padding-left: 20px; color: #444;">
+                    <li><b>Frontend:</b> Built with React.js using Functional Components and Hooks.</li>
+                    <li><b>Backend:</b> Node.js & Express REST APIs for data processing.</li>
+                    <li><b>Database:</b> MongoDB for secure storage of client and invoice data.</li>
+                    <li><b>Features:</b> Dynamic row addition, PDF generation, and User Authentication.</li>
+                </ul>
+                <div style="margin-top: 15px;">
+                    <a href="https://github.com/VYOM7123" target="_blank"
+                        style="text-decoration: none; color: #1a2a6c; font-weight: bold; border: 1px solid #1a2a6c; padding: 5px 15px; border-radius: 5px;">View
+                        GitHub Code</a>
+                </div>
+            </div>
+
+            <div style="background: #fff; border: 1px solid #e0e0e0; padding: 20px; border-radius: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                    <h3 style="margin: 0; color: #1a2a6c;">🌐 Personal Portfolio</h3>
+                    <span style="color: green; font-weight: bold;">Completed</span>
+                </div>
+                <p style="margin-top: 10px; color: #555;">
+                    A modern, single-page responsive portfolio to showcase my skills, education, and development
+                    journey.
+                </p>
+                <p><b>Tech Stack:</b> HTML5, CSS3 (Flexbox/Grid), JavaScript (DOM Manipulation).</p>
+            </div>
+
+            <div style="margin-top: 20px; text-align: center; padding: 15px; background: #e8f4fd; border-radius: 8px;">
+                <p style="margin: 0;">💡 <b>Upcoming Project:</b> I am planning to build a <b>E-commerce Platform</b> or
+                    <b>Task Management Tool</b> next to further explore Redux Toolkit.
+                </p>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Education Details</h2>
+            <div style="overflow-x: auto;">
+                <table>
+                    <tr>
+                        <th>Degree / Course</th>
+                        <th>University / Institute</th>
+                        <th>Duration</th>
+                        <th>Result / CGPA</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>MCA</b> (Master of Computer Applications)<br>
+                            <small>Specialization: Web Development</small>
+                        </td>
+                        <td>Silver Oak University, Ahmedabad</td>
+                        <td>2024 - 2026</td>
+                        <td>
+                            <span class="highlight">8.44 CGPA</span> (Sem 3)<br>
+                            <span style="font-size: 0.85em; color: #555;">Current Semester: 4</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>BCA</b> (Bachelor of Computer Applications)
+                        </td>
+                        <td>Silver Oak University, Ahmedabad</td>
+                        <td>2021 - 2024</td>
+                        <td><b>7.25 CGPA</b> (Completed)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>HSC</b> (Commerce Stream)
+                        </td>
+                        <td>Gujarat Secondary and Higher Secondary Education Board</td>
+                        <td>Completed 2021</td>
+                        <td>Standard 12th</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div
+                style="margin-top: 15px; padding: 15px; background: #f0f4f8; border-left: 4px solid #1a2a6c; border-radius: 4px;">
+                <p style="margin: 0; font-style: italic; font-size: 0.95em;">
+                    <strong>Academic Focus:</strong> During my studies, I have focused on Data Structures, Database
+                    Management Systems (MongoDB/MySQL), and Modern Web Technologies (React & Node.js).
+                </p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Technical Skills</h2>
+
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-top: 4px solid #3498db;">
+                    <h3 style="margin-top: 0; color: #1a2a6c;">🎨 Frontend Development</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;">
+                            <b>React.js</b>
+                            <div style="background: #ddd; height: 8px; border-radius: 4px; margin-top: 5px;">
+                                <div style="background: #3498db; width: 75%; height: 100%; border-radius: 4px;"></div>
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <b>JavaScript (ES6+)</b>
+                            <div style="background: #ddd; height: 8px; border-radius: 4px; margin-top: 5px;">
+                                <div style="background: #3498db; width: 85%; height: 100%; border-radius: 4px;"></div>
+                            </div>
+                        </li>
+                        <li>HTML5 & CSS3 (Flexbox/Grid)</li>
+                    </ul>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-top: 4px solid #1a2a6c;">
+                    <h3 style="margin-top: 0; color: #1a2a6c;">⚙️ Backend & Database</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;">
+                            <b>Node.js & Express</b>
+                            <div style="background: #ddd; height: 8px; border-radius: 4px; margin-top: 5px;">
+                                <div style="background: #1a2a6c; width: 70%; height: 100%; border-radius: 4px;"></div>
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <b>MongoDB</b>
+                            <div style="background: #ddd; height: 8px; border-radius: 4px; margin-top: 5px;">
+                                <div style="background: #1a2a6c; width: 80%; height: 100%; border-radius: 4px;"></div>
+                            </div>
+                        </li>
+                        <li>RESTful API Design</li>
+                    </ul>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-top: 4px solid #e91e63;">
+                    <h3 style="margin-top: 0; color: #1a2a6c;">🛠️ Tools & Others</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
+                        <span
+                            style="background: #e1f5fe; color: #0288d1; padding: 5px 12px; border-radius: 20px; font-size: 0.9em; font-weight: bold;">Git
+                            & GitHub</span>
+                        <span
+                            style="background: #fce4ec; color: #c2185b; padding: 5px 12px; border-radius: 20px; font-size: 0.9em; font-weight: bold;">Postman</span>
+                        <span
+                            style="background: #e8f5e9; color: #388e3c; padding: 5px 12px; border-radius: 20px; font-size: 0.9em; font-weight: bold;">VS
+                            Code</span>
+                        <span
+                            style="background: #fff3e0; color: #f57c00; padding: 5px 12px; border-radius: 20px; font-size: 0.9em; font-weight: bold;">Problem
+                            Solving</span>
+                        <span
+                            style="background: #f3e5f5; color: #7b1fa2; padding: 5px 12px; border-radius: 20px; font-size: 0.9em; font-weight: bold;">C++
+                            / Java</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Professional Experience</h2>
+
+            <div style="border-left: 4px solid #1a2a6c; padding-left: 20px; margin-left: 10px; position: relative;">
+                <div
+                    style="width: 15px; height: 15px; background: #1a2a6c; border-radius: 50%; position: absolute; left: -10px; top: 0;">
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+                    <h3 style="margin: 0; color: #1a2a6c;">MERN Stack Developer Intern</h3>
+                    <span style="font-weight: bold; color: #7f8c8d;">Dec 2023 - May 2024</span>
+                </div>
+
+                <p style="margin: 5px 0; font-weight: bold; color: #3498db;">Sparks To Idea, Ahmedabad</p>
+
+                <p style="color: #555; font-style: italic;">
+                    Collaborated with a team of developers to build and maintain high-performance web applications using
+                    the MERN ecosystem.
+                </p>
+
+                <ul style="padding-left: 20px; color: #444; line-height: 1.8;">
+                    <li>Developed <b>responsive UI components</b> using React.js and CSS3 to ensure seamless user
+                        experience across devices.</li>
+                    <li>Assisted in building <b>RESTful APIs</b> with Node.js and Express to connect the frontend with
+                        MongoDB databases.</li>
+                    <li>Participated in <b>daily stand-up meetings</b> and version control workflows using <b>Git &
+                            GitHub</b>.</li>
+                    <li>Optimized application performance by identifying and fixing frontend bugs and improving API
+                        response times.</li>
+                    <li>Gained hands-on experience in <b>state management</b> and handling asynchronous data flows.</li>
+                </ul>
+            </div>
+
+            <div
+                style="margin-top: 25px; padding: 15px; background: #fffde7; border-radius: 8px; border: 1px dashed #fbc02d;">
+                <p style="margin: 0; font-size: 0.9em; color: #616161;">
+                    📌 <b>Key Takeaway:</b> This internship bridge the gap between my academic knowledge and
+                    industry-standard coding practices, specifically in building scalable MERN architectures.
+                </p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Hire Me / Contact For Freelancing</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 40px; margin-top: 25px;">
+
+                <div style="flex: 1; min-width: 300px;">
+                    <p style="font-size: 1.1em; color: #555; line-height: 1.8;">
+                        I am currently open to <strong>Freelance Projects</strong>, <strong>Remote Work</strong>, and
+                        <strong>Full-time Opportunities</strong>. Whether you need a simple landing page or a complex
+                        MERN application, I am ready to help.
+                    </p>
+
+                    <div style="margin-top: 30px;">
+                        <div style="margin-bottom: 25px; display: flex; align-items: center;">
+                            <div style="background: #e8f0fe; padding: 10px; border-radius: 8px; margin-right: 15px;">📍
+                            </div>
+                            <div>
+                                <strong style="display: block; color: #1a2a6c;">Location</strong>
+                                <span style="color: #7f8c8d;">Viramgam, Gujarat, India</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 25px; display: flex; align-items: center;">
+                            <div style="background: #e8f0fe; padding: 10px; border-radius: 8px; margin-right: 15px;">📧
+                            </div>
+                            <div>
+                                <strong style="display: block; color: #1a2a6c;">Email Me</strong>
+                                <a href="mailto:vyomdalwadi@gmail.com"
+                                    style="color: #3498db; text-decoration: none;">vyomdalwadi@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 25px; display: flex; align-items: center;">
+                            <div style="background: #e8f0fe; padding: 10px; border-radius: 8px; margin-right: 15px;">🔗
+                            </div>
+                            <div>
+                                <strong style="display: block; color: #1a2a6c;">Social Profiles</strong>
+                                <a href="https://www.linkedin.com/in/vyom-dalwadi-aa313927a" target="_blank"
+                                    style="color: #0077b5; text-decoration: none;">LinkedIn</a> |
+                                <a href="https://github.com/VYOM7123" target="_blank"
+                                    style="color: #333; text-decoration: none;">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    style="flex: 1.2; min-width: 300px; background: #ffffff; padding: 30px; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                    <form action="https://formspree.io/f/mjgeknzl" method="POST">
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #1a2a6c;">Full
+                                Name</label>
+                            <input type="text" name="name" placeholder="Ex: Dalwadi Vyom" required
+                                style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; outline: none;">
+                        </div>
+
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #1a2a6c;">Email
+                                Address</label>
+                            <input type="email" name="email" placeholder="example@mail.com" required
+                                style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; outline: none;">
+                        </div>
+
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #1a2a6c;">Service
+                                Required</label>
+                            <select name="service"
+                                style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; background: white; cursor: pointer;">
+                                <option value="MERN App">Full Stack MERN Application</option>
+                                <option value="Frontend">Frontend React Development</option>
+                                <option value="Backend">Backend Node/Express API</option>
+                                <option value="Internship">Internship Opportunity</option>
+                            </select>
+                        </div>
+
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #1a2a6c;">Project
+                                Details</label>
+                            <textarea name="message" rows="5" placeholder="Briefly explain your requirements..."
+                                required
+                                style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; outline: none; resize: none;"></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn"
+                            style="width: 100%; font-size: 1.1em; padding: 15px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">
+                            Send Message 🚀
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 College Student Portfolio | Dalwadi Vyom</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+
+            const sections = document.querySelectorAll('section');
+            sections.forEach(sec => {
+                sec.classList.remove('active');
+            });
+
+
+            const target = document.getElementById(sectionId);
+            if (target) {
+                target.classList.add('active');
+            }
+
+
+            const links = document.querySelectorAll('nav a');
+            links.forEach(link => {
+                link.classList.remove('active-link');
+                if (link.innerText.toLowerCase() === sectionId || (sectionId === 'contact' && link.innerText === 'Hire Me')) {
+                    link.classList.add('active-link');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+
+</html>
